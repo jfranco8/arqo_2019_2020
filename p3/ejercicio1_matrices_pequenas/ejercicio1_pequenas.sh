@@ -14,11 +14,11 @@ make
 # P = (44 mod 7) + 4 = 2 + 4 = 6
 
 # Inicializamos las variables
-NInicio=10000+1024*6 # Tamaño donde empezarán a iterar las matrices
+NInicio=0 # Tamaño donde empezarán a iterar las matrices
 NPaso=64 # Tamaño de iteración
 NFinal=(NInicio+1024) # Tamaño al que llegarán las matrices
-fDAT=time_slow_fast.dat # Fichero donde volcaremos los datos
-fPNG=time_slow_fast.png # Imagen donde mostraremos la gráfica
+fDAT=time_slow_fast_pequenas.dat # Fichero donde volcaremos los datos
+fPNG=time_slow_fast_pequenas.png # Imagen donde mostraremos la gráfica
 NumRep=15 # Numero de repeticiones del programa, para obtener un resultado más ajustado
 
 # Borramos el fihero DAT y la imagen por si las teníamos creadas de antes
