@@ -1,7 +1,5 @@
 #!/bin/bash
 
-make
-
 # Arquitectura de ordenadores 2019/2020
 # Practica 3
 #
@@ -11,7 +9,11 @@ make
 # Grupo 1362
 # Pareja 44
 
+# Semilla P
 # P = (44 mod 7) + 4 = 2 + 4 = 6
+
+make clean
+make
 
 # Inicializamos las variables
 NInicio=0 # Tamaño donde empezarán a iterar las matrices
@@ -29,6 +31,7 @@ touch $fDAT
 echo ""
 echo "------------------------------------------"
 echo "| Práctica 3 - ARQO                      |"
+echo "| Ejercicio 1 pequeñas                   |"
 echo "| 2019 - 2020                            |"
 echo "| Grupo 1362 Pareja 44                   |"
 echo "| Jesus Daniel Franco Lopez              |"
@@ -96,7 +99,7 @@ replot
 quit
 END_GNUPLOT
 
-echo "Acaba de ejecutar a las:"
+echo "Hora de finalización de ejecución:"
 date +"%T"
 
 # Acabamos la ejecución y hacemos make clean
