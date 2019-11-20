@@ -2,8 +2,6 @@ LIBS =
 LIB_DIR =
 FLAGS = -g -Wall -D_GNU_SOURCE
 
-.PHONY: clean all
-
 all: multNormal multTraspuesta
 
 multNormal: multNormal.c arqo3.c
@@ -13,4 +11,4 @@ multTraspuesta: multTraspuesta.c arqo3.c
 	gcc $(FLAGS) $(LIB_DIR) -o $@ $^ $(LIBS)
 
 clean:
-	rm -f *.o *~ fast slow multNormal multTraspuesta 
+	rm -f *~ fast slow multNormal multTraspuesta *.o

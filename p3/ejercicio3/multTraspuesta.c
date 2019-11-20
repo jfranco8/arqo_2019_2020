@@ -6,10 +6,9 @@
 *
 * multTraspuesta.c
 *
-* GRUPO 1301 PAREJA 37
+* Grupo 1362 Pareja 44
 *
 * Jesus Daniel Franco Lopez
-* Santiago Manuel Valderrabano Zamorano
 *
 **********************************************/
 
@@ -21,14 +20,15 @@
 
 
 /*
+* CALCULAR
 *
-* Esta funcion calcula la multiplicacion de
-* de 2 matrices, a y b, con un tamano dado n.
+* Calcula la multiplicacion de 2 matrices, a y b, con un tamano dado n.
 *
+* Guarda en la matriz resultado la multiplicacion calculada
 */
 
 void calcular(int n, tipo **a, tipo **b, tipo** resultado){
-
+	// Inicializamos los contadores
 	int i = 0, j = 0, k = 0;
 
 	printf("\t --- MATRIZ RESULTADO ---\n");
@@ -36,6 +36,9 @@ void calcular(int n, tipo **a, tipo **b, tipo** resultado){
 	for(i = 0; i < n; i++){
 		for(j = 0; j < n; j++){
 			for (k = 0; k < n; k++){
+				// guardamos el resultado
+				// accedemos a la posicion [j][k] de b en vez de a [k][j]
+				// porque multiplicamos por la matriz traspuesta
 				resultado[i][j] += a[i][k]*b[j][k];
 			}
 			printf("%lf\t", resultado[i][j]);
@@ -45,10 +48,11 @@ void calcular(int n, tipo **a, tipo **b, tipo** resultado){
 }
 
 /*
+* TRASPONER
 *
-* Esta funcion traspone una matriz dada "a"
-* de tamano "n".
+* Traspone una matriz dada "a" de tamano "n".
 *
+* guarda en a el resultado de trasponer a
 */
 
 void trasponer(int n, tipo** a){
@@ -65,10 +69,25 @@ void trasponer(int n, tipo** a){
 	}
 }
 
+/*
+* IMPRIMIR_MATRIZ
+*
+* imprime por pantalla la matriz a pasada como argumento
+*/
+void imprimir_matriz(tipo **a, int size){
+	int i, j;
+	for(i = 0; i < size; i++){
+		for(j = 0; j < size; j++){
+			printf("%lf\t", a[i][j]);
+		}
+		printf("\n");
+	}
+}
+
 
 int main( int argc, char *argv[]){
 
-  int i, j, n = 0;
+  int n = 0;
 	struct timeval inicio, fin;
 
   /* MATRICES */
@@ -76,17 +95,20 @@ int main( int argc, char *argv[]){
 	tipo **b = NULL;
 	tipo **resultado = NULL;
 
+ // COMPROBACION DE ERRORES
+
 	if(argc != 2){
 		printf("Error en los parametros de entrada: ./%s <size>\n", argv[0]);
 		return -1;
 	}
 
   n = atoi(argv[1]);
-
 	if(n <= 0){
     printf("Error en los parametros de entrada: size tiene que ser un entero > 0\n");
 		return -1;
   }
+
+	// CREAMOS LAS MATRICES OPERANDOS Y RESUTADO
 
 	if(!(a = generateMatrix(n)) || !(b = generateMatrix(n))){
 		return -1;
@@ -96,35 +118,19 @@ int main( int argc, char *argv[]){
 		return -1;
 	}
 
+	// IMPRIMIMOS LAS MATRICES OPERANDO
 	printf("\t --- MATRIZ A ---\n");
-	for(i = 0; i < n; i++){
-		for(j = 0; j < n; j++){
-			printf("%lf\t", a[i][j]);
-		}
-		printf("\n");
-	}
-
+	imprimir_matriz(a, n);
 	printf("\t --- MATRIZ B ---\n");
-	for(i = 0; i < n; i++){
-		for(j = 0; j < n; j++){
-			printf("%lf\t", b[i][j]);
-		}
-		printf("\n");
-	}
+	imprimir_matriz(b, n);
 
 	gettimeofday(&inicio, NULL);
-
 	/* Trasponemos las matriz B antes de hacer el calculo de la multiplicacion */
   trasponer(n,b);
-
   /* Calculamos la multiplicacion entre las 2 matrices generadas */
-
   calcular(n, a, b, resultado);
-
   gettimeofday(&fin, NULL);
-
   printf("Execution time: %f\n", ((fin.tv_sec*1000000+fin.tv_usec)-(inicio.tv_sec*1000000+inicio.tv_usec))*1.0/1000000.0);
-
 
 	freeMatrix(a);
 	freeMatrix(b);
