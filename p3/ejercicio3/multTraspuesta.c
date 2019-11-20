@@ -52,21 +52,22 @@ void calcular(int n, tipo **a, tipo **b, tipo** resultado){
 *
 * Traspone una matriz dada "a" de tamano "n".
 *
-* guarda en a el resultado de trasponer a
+* guarda en b el resultado de trasponer a y lo devuelve
 */
 
-void trasponer(int n, tipo** a){
+tipo** trasponer(int n, tipo** a){
 
 	int i = 0,j = 0;
-	tipo buffer;
+	tipo** b = generateEmptyMatrix(n);
 
 	for (i = 0; i < n; i++){
 		for (j = 0; j < n; j++){
-			buffer = a[i][j];
-			a[i][j] = a[j][i];
-			a[j][i] = buffer;
+			b[j][i] = a[i][j];
 		}
 	}
+
+	return b;
+
 }
 
 /*
@@ -93,6 +94,7 @@ int main( int argc, char *argv[]){
   /* MATRICES */
 	tipo **a = NULL;
 	tipo **b = NULL;
+	tipo **b_trasp = NULL;
 	tipo **resultado = NULL;
 
  // COMPROBACION DE ERRORES
@@ -125,15 +127,14 @@ int main( int argc, char *argv[]){
 	imprimir_matriz(b, n);
 
 	gettimeofday(&inicio, NULL);
-	/* Trasponemos las matriz B antes de hacer el calculo de la multiplicacion */
-  trasponer(n,b);
-  /* Calculamos la multiplicacion entre las 2 matrices generadas */
-  calcular(n, a, b, resultado);
+	b_trasp = trasponer(n,b);
+  calcular(n, a, b_trasp, resultado);
   gettimeofday(&fin, NULL);
   printf("Execution time: %f\n", ((fin.tv_sec*1000000+fin.tv_usec)-(inicio.tv_sec*1000000+inicio.tv_usec))*1.0/1000000.0);
 
 	freeMatrix(a);
 	freeMatrix(b);
+	freeMatrix(b_trasp);
 	freeMatrix(resultado);
 
 }

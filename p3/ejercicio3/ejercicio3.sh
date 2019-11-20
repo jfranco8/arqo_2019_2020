@@ -18,9 +18,9 @@ clear
 
 # Inicializar variables
 NInicio=256+256*6
-NPaso=16
+NPaso=32
 NFinal=$((NInicio + 256))
-NumRep=10
+NumRep=5
 
 fDat=mult.dat
 
