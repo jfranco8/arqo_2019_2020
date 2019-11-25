@@ -17,10 +17,11 @@ make
 clear
 
 # Inicializar variables
-NInicio=64+64*6
-NPaso=8
-NFinal=$((NInicio + 64))
-NumRep=1
+# Utilizo P = 3 para que el programa no tarde tanto en ejecutar
+NInicio=256+256*3
+NPaso=16
+NFinal=$((NInicio + 256))
+NumRep=5
 
 fDat=mult.dat
 
