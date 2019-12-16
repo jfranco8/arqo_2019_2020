@@ -64,7 +64,7 @@ void imprimir_matriz(tipo **a, int size){
 
 int main(int argc, char *argv[]){
 
-  int n = 0;
+  int i, j, n = 0, num_hilos;
 	struct timeval inicio, fin;
 
   /* MATRICES */
@@ -72,39 +72,62 @@ int main(int argc, char *argv[]){
 	tipo **b = NULL;
 	tipo **resultado = NULL;
 
-	// COMPROBACION DE ERRORES
+	if(argc != 3){
 
-	if(argc != 2){
-		printf("Error en los parametros de entrada: ./%s <size>\n", argv[0]);
+		printf("Error en los parametros de entrada: ./%s <size> <num_hilos>\n", argv[0]);
 		return -1;
 	}
 
 	n = atoi(argv[1]);
+	num_hilos = atoi(argv[2]);
+
 	if(n <= 0){
     printf("Error en los parametros de entrada: size tiene que ser un entero > 0\n");
 		return -1;
   }
 
-	// CREAMOS LAS MATRICES OPERANDOS
+	if(num_hilos <= 0){
+    printf("Error en los parametros de entrada: num_hilos tiene que ser un entero > 0\n");
+		return -1;
+  }
+
+	omp_set_num_threads(num_hilos);
+
 	if(!(a = generateMatrix(n)) || !(b = generateMatrix(n))){
 		return -1;
 	}
 
 	printf("\t --- MATRIZ A ---\n");
-	imprimir_matriz(a, n);
-	printf("\t --- MATRIZ B ---\n");
-	imprimir_matriz(b, n);
+	for(i = 0; i < n; i++){
+		for(j = 0; j < n; j++){
+			printf("%lf\t", a[i][j]);
+		}
+		printf("\n");
+	}
 
-	// CREAMOS LA MATRIZ RESULTADO
+	printf("\t --- MATRIZ B ---\n");
+	for(i = 0; i < n; i++){
+		for(j = 0; j < n; j++){
+			printf("%lf\t", b[i][j]);
+		}
+		printf("\n");
+	}
+
 	if (!(resultado = generateEmptyMatrix(n))){
 		return -1;
 	}
 
+
 	gettimeofday(&inicio, NULL);
+
   /* Calculamos la multiplicacion entre las 2 matrices generadas */
+
   calcular(n, a, b, resultado);
+
   gettimeofday(&fin, NULL);
+
   printf("Execution time: %f\n", ((fin.tv_sec*1000000+fin.tv_usec)-(inicio.tv_sec*1000000+inicio.tv_usec))*1.0/1000000.0);
+
 
 	freeMatrix(a);
 	freeMatrix(b);
