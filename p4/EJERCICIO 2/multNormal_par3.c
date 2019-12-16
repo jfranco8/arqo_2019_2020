@@ -30,6 +30,7 @@
 void calcular(int n, tipo **a, tipo **b, tipo** resultado){
 	// Inicializamos los contadores
 	int i = 0, j = 0, k = 0;
+	float sum = 0;
 
 	printf("\t --- MATRIZ RESULTADO ---\n");
 	#pragma omp parallel for reduction(+:sum) private (i,j,k) shared(resultado,a,b,n)
