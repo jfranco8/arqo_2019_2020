@@ -2,8 +2,14 @@
 
 make clean
 make
+clear
 
 #inicializamos variables
+
+echo "Hora de comienzo de ejecución:"
+date +"%T"
+echo ""
+echo "Ejecutando ejercicio 2..."
 
 min=50000000
 max=900000000

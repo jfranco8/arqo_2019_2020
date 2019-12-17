@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 	long long k=0;
 	struct timeval fin,ini;
 	float sum=0;
-	
+
 	int size;
 	int num_hilos;
 	if(argc!=3){
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 		freeVector(B);
 		return -1;
 	}
-	
+
 	omp_set_num_threads(num_hilos);
 
 	gettimeofday(&ini,NULL);

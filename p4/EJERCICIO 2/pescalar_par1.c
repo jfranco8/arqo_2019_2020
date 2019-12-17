@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 	long long k=0;
 	struct timeval fin,ini;
 	float sum=0;
-	
+
 	int size;
 	if(argc!=2){
 		printf("Introduce el tamano de los vectores a crear");
@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 		freeVector(B);
 		return -1;
 	}
-	
+
 	gettimeofday(&ini,NULL);
 	/* Bloque de computo */
 	sum = 0;
